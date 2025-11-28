@@ -103,7 +103,7 @@ const GoalItem = React.memo(({ goal, onUpdateProgress, onDelete }) => {
         {isCompleted && (
           <div className="completion-message">
             <Trophy size={16} />
-            <span>임무 완료! 축하합니다!</span>
+            <span>목표도달 완료! 축하합니다!</span>
           </div>
         )}
       </div>

@@ -18,10 +18,10 @@ const GoalList = React.memo(({ goals, onUpdateProgress, onDelete }) => {
             color: "var(--color-text-muted)",
           }}
         >
-          현재 스프린트에 목표가 없습니다.
+          현재 예정중인 목표가 없습니다.
         </p>
         <p style={{ fontSize: "0.875rem", marginTop: "0.5rem", color: "#777" }}>
-          새로운 목표를 추가하여 스프린트를 시작하세요.
+          새로운 목표를 추가하여 GOALFLIX를 시작하세요.
         </p>
       </div>
     );

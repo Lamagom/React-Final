@@ -1,6 +1,6 @@
 /* ====================================================================
-   1. GLOBAL & RESET
-   ==================================================================== */
+    1. GLOBAL & RESET
+    ==================================================================== */
 :root {
   --color-dark-bg: #141414; /* 넷플릭스 배경 */
   --color-card-bg: #1f1f1f; /* 카드 기본 배경 */
@@ -25,8 +25,8 @@ body {
 }
 
 /* ====================================================================
-   2. NAVBAR & UTILS
-   ==================================================================== */
+    2. NAVBAR & UTILS
+    ==================================================================== */
 .navbar {
   position: fixed;
   top: 0;
@@ -54,8 +54,8 @@ body {
 }
 
 /* ====================================================================
-   3. HERO SECTION (DASHBOARD)
-   ==================================================================== */
+    3. HERO SECTION (DASHBOARD)
+    ==================================================================== */
 .hero-section {
   padding-top: 6rem;
   margin-bottom: 3rem;
@@ -120,8 +120,8 @@ body {
 }
 
 /* ====================================================================
-   4. PROGRESS BAR
-   ==================================================================== */
+    4. PROGRESS BAR
+    ==================================================================== */
 .progress-container {
   width: 100%;
   max-width: 400px;
@@ -152,8 +152,8 @@ body {
 }
 
 /* ====================================================================
-   5. FORM STYLES
-   ==================================================================== */
+    5. FORM STYLES
+    ==================================================================== */
 .goal-form-section {
   padding: 1.5rem;
   background-color: #1a1a1a;
@@ -218,8 +218,8 @@ body {
 }
 
 /* ====================================================================
-   6. GOAL LIST & ITEM (CARD)
-   ==================================================================== */
+    6. GOAL LIST & ITEM (CARD)
+    ==================================================================== */
 .goal-list-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -387,9 +387,10 @@ body {
 }
 
 /* ====================================================================
-   7. MODAL STYLES
-   ==================================================================== */
-.modal-backdrop {
+    7. MODAL STYLES
+    ==================================================================== */
+.modal-overlay {
+  /* Backdrop 클래스 이름 변경 */
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.7);
@@ -421,26 +422,88 @@ body {
   }
 }
 
+/* modal-button 공통 스타일 추가 */
+.modal-button {
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* Primary/Confirm Button (기존 modal-confirm-btn) */
 .modal-confirm-btn {
   background-color: var(--color-accent);
   color: var(--color-text-white);
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
-  font-weight: 600;
-  transition: background-color 0.2s;
+  box-shadow: 0 4px 10px rgba(229, 9, 20, 0.4);
 }
 
 .modal-confirm-btn:hover {
   background-color: var(--color-accent-light);
 }
 
+/* Secondary/Cancel Button (기존 modal-cancel-btn) */
 .modal-cancel-btn {
+  background-color: transparent;
   color: var(--color-text-muted);
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
-  transition: background-color 0.2s;
 }
 
 .modal-cancel-btn:hover {
   background-color: #333333;
+  color: var(--color-text-light);
+}
+
+/* ⭐️ 텍스트 버튼 스타일 (흰 바탕 없이 글자만 어둡게) */
+.modal-button-text {
+  /* 배경과 테두리를 투명하게 */
+  background-color: transparent !important;
+  border: none !important;
+
+  /* 글자색을 어둡게 (다크 모드 기준으로는 흐린 텍스트 색상) */
+  color: var(--color-text-muted) !important;
+
+  /* 기본 버튼에 설정된 box-shadow 제거 */
+  box-shadow: none !important;
+  padding: 0.5rem 0.5rem; /* 텍스트 버튼은 패딩을 약간 줄임 */
+}
+
+.modal-button-text:hover {
+  /* 호버 시 옅은 배경색을 추가하여 버튼임을 표시 */
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  color: var(--color-text-light) !important; /* 글자를 더 밝게 */
+}
+
+/* ---------------------------------------------------- */
+/* 3. 모달 오버라이드 (우측 상단 배치) */
+/* ---------------------------------------------------- */
+
+/* 모달 컨텐츠 자체의 스타일 오버라이드 */
+.modal-content.top-right-modal {
+  position: fixed; /* 뷰포트에 고정 */
+  top: 5rem; /* 상단에서 띄우기 (네비게이션바 아래) */
+  right: 2rem; /* 오른쪽에서 띄우기 */
+  transform: none; /* 중앙 정렬 (translate) 해제 */
+  max-width: 400px; /* 폭 제한 */
+  width: 90%;
+}
+
+/* 닫기 버튼 위/아래 여백 조정 */
+.modal-content.top-right-modal .modal-actions {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border); /* 변수 변경 */
+}
+
+/* 제목 아래 여백 조정 */
+.modal-content.top-right-modal .modal-title {
+  margin-bottom: 0.5rem;
+}
+
+/* 상세 내용 컨테이너 (스크롤 가능하게 설정) */
+.modal-content.top-right-modal .modal-message-content {
+  max-height: 70vh; /* 최대 높이 설정 */
+  overflow-y: auto;
+  padding-right: 15px; /* 스크롤바 공간 확보 */
 }

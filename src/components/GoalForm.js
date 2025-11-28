@@ -45,7 +45,7 @@ const GoalForm = React.memo(({ onAddGoal }) => {
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            placeholder="목표 제목 (예: React 최종 과제 완성)"
+            placeholder="목표 제목 (예: React 기말고사 공부하기)"
             className="form-input"
             style={{ paddingLeft: "2.5rem" }}
             required
