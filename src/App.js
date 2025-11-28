@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useState, useCallback, useMemo, useEffect } from "react";
 import { TrendingUp, Info, Play } from "lucide-react";
 
@@ -16,7 +15,7 @@ import "./App.css"; // 순수 CSS 파일 임포트
 const initialSprints = [{ id: "sprint-1", name: "Sprint 1 (시작)" }];
 
 /**
- * 메인 애플리케이션 컴포넌트 (Dashboard 역할)
+ * 메인 애플리케이션 컴포넌트
  */
 function App() {
   const [sprints, setSprints] = useLocalStorage(
@@ -30,6 +29,7 @@ function App() {
   );
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isInfoModalOpen, setIsInfoModalOpen] = useState(false); // 상세 정보 모달 상태
   const [sprintToDelete, setSprintToDelete] = useState(null);
 
   useEffect(() => {
@@ -120,11 +120,78 @@ function App() {
     setSprintToDelete(null);
   }, [sprintToDelete, setSprints, setGoals, setSelectedSprintId]);
 
-  // 진행률 색상 결정 (Inline Style)
+  // 진행률 색상 결정
   const progressColor =
     averageProgress === 100
       ? "var(--color-status-complete)"
       : "var(--color-accent)";
+
+  // 상세 정보
+  const devHistoryContent = (
+    <div
+      style={{
+        padding: "10px",
+        color: "var(--color-text-light)",
+        lineHeight: 1.6,
+      }}
+    >
+      <h4
+        style={{
+          color: "var(--color-accent)",
+          marginBottom: "0.75rem",
+          fontSize: "1.25rem",
+        }}
+      >
+        GOALFLIX 상세정보
+      </h4>
+
+      <ul style={{ listStyleType: "disc", marginLeft: "1.5rem" }}>
+        <li style={{ marginBottom: "0.5rem" }}>
+          **V 1.0.0 (2025.11.28):** 프로젝트 초기 설정 및 Redux 대신
+          LocalStorage를 활용한 상태 관리 구현이 업데이트 되었습니다.
+        </li>
+        <li style={{ marginBottom: "0.5rem" }}>
+          **V 1.1.0 (2025.11.29):** Tailwind CSS를 순수 CSS로 마이그레이션 완료.
+          아키텍처 정리 및 폴더 구조 확립이 업데이트 되었습니다.
+        </li>
+        <li style={{ marginBottom: "0.5rem" }}>
+          **V 1.2.0 (2025.11.30):** 스프린트 관리 및 목표 생성/수정/삭제 기능
+          완성. lucide-react 아이콘 도입이 업데이트 되었습니다.
+        </li>
+        <li style={{ marginBottom: "0.5rem" }}>
+          **V 1.3.0 (2025.12.01):** 상세 정보 팝업(모달) 추가 및 우측 상단 배치
+          스타일 적용이 업데이트 되었습니다.
+        </li>
+      </ul>
+
+      <p
+        style={{
+          marginTop: "1.5rem",
+          color: "var(--color-text-muted)",
+          borderTop: "1px solid var(--color-dark-bg-light)",
+          paddingTop: "0.5rem",
+          fontSize: " 0.8rem",
+          textAlign: "center",
+        }}
+      >
+        * Sprint - 애자일 방법론에서 단기 작업 주기를 의미합니다. *
+      </p>
+
+      <p
+        style={{
+          marginTop: "1.5rem",
+          color: "var(--color-text-muted)",
+          borderTop: "1px solid var(--color-dark-bg-light)",
+          paddingTop: "0.5rem",
+          fontSize: " 0.5rem",
+          textAlign: "center",
+        }}
+      >
+        * GOALFLIX는 연암 공과대학교 스마트소프트웨어 학과의 React 과제를 위해
+        개발 되었습니다 *
+      </p>
+    </div>
+  );
 
   return (
     <div
@@ -134,7 +201,6 @@ function App() {
         color: "var(--color-text-light)",
       }}
     >
-      {/* 1. Header & Navigation (Fixed) */}
       <nav className="navbar">
         <div
           className="max-width-container"
@@ -156,9 +222,7 @@ function App() {
       </nav>
 
       <div className="max-width-container">
-        {/* 2. Hero Section (Dashboard Overview) */}
         <div className="hero-section">
-          {/* Background Effect (고급 UI 연출) */}
           <div
             className="hero-background"
             style={{
@@ -167,7 +231,6 @@ function App() {
           />
           <div className="hero-gradient" />
 
-          {/* Content */}
           <div className="hero-content">
             <div
               style={{
@@ -207,8 +270,6 @@ function App() {
               이번 스프린트의 목표 달성률을 확인하세요. 작은 진전이 모여 큰
               결과를 만듭니다.
             </p>
-
-            {/* 전체 진행률 바 */}
             <div className="progress-container">
               <div className="progress-label">
                 <span
@@ -260,6 +321,7 @@ function App() {
                 <span>목표 시작하기</span>
               </button>
               <button
+                onClick={() => setIsInfoModalOpen(true)}
                 style={{
                   backgroundColor: "rgba(107, 114, 128, 0.7)",
                   color: "white",
@@ -280,12 +342,10 @@ function App() {
           </div>
         </div>
 
-        {/* 3. Goal Form Section */}
         <div id="goal-input-section" style={{ marginBottom: "3rem" }}>
           <GoalForm onAddGoal={addGoal} />
         </div>
 
-        {/* 4. Goals List Section */}
         <div style={{ marginBottom: "2.5rem" }}>
           <h3
             className="form-title-border"
@@ -315,7 +375,6 @@ function App() {
         </div>
       </div>
 
-      {/* 5. Custom Confirmation Modal */}
       <ConfirmationModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
@@ -323,6 +382,18 @@ function App() {
         title="스프린트 및 목표 삭제"
         message="선택한 스프린트와 이 스프린트에 포함된 모든 목표가 영구적으로 삭제됩니다. 이 작업은 되돌릴 수 없습니다. 계속하시겠습니까?"
       />
+
+      <ConfirmationModal
+        isOpen={isInfoModalOpen}
+        onClose={() => setIsInfoModalOpen(false)}
+        onConfirm={() => setIsInfoModalOpen(false)} // 확인 버튼을 닫기로 사용
+        title="GOALFLIX"
+        confirmText="닫기"
+        hideCancel={true}
+        modalClassName="top-right-modal" // CSS 클래스 적용
+      >
+        {devHistoryContent} {/* 공지사항 */}
+      </ConfirmationModal>
     </div>
   );
 }

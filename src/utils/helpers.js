@@ -1,8 +1,4 @@
-// src/utils/helpers.js
-
-/**
- * 진행률에 따른 상태 텍스트 및 색상 반환
- */
+/*  진행률에 따른 상태 텍스트 및 색상 반환 */
 export const getGoalStatus = (progress) => {
   if (progress === 100)
     return {
@@ -26,9 +22,7 @@ export const getGoalStatus = (progress) => {
   };
 };
 
-/**
- * 목표 배열의 평균 진행률 계산
- */
+/*  목표 배열의 평균 진행률 계산 */
 export const calculateAverageProgress = (goals) => {
   if (!goals || goals.length === 0) return 0;
   const total = goals.reduce((sum, goal) => sum + goal.progress, 0);

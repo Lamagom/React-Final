@@ -4,8 +4,7 @@ import GoalItem from "./GoalItem";
 import "../App.css";
 
 /**
- * 목표 목록을 그리드 형태로 보여주는 컴포넌트입니다.
- */
+ * 그리드 목표 목록 */
 const GoalList = React.memo(({ goals, onUpdateProgress, onDelete }) => {
   if (goals.length === 0) {
     return (
@@ -18,10 +17,10 @@ const GoalList = React.memo(({ goals, onUpdateProgress, onDelete }) => {
             color: "var(--color-text-muted)",
           }}
         >
-          현재 스프린트에 목표가 없습니다.
+          현재 예정중인 목표가 없습니다.
         </p>
         <p style={{ fontSize: "0.875rem", marginTop: "0.5rem", color: "#777" }}>
-          새로운 목표를 추가하여 스프린트를 시작하세요.
+          새로운 목표를 추가하여 GOALFLIX를 시작하세요.
         </p>
       </div>
     );

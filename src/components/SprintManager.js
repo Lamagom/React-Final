@@ -3,7 +3,7 @@ import { ChevronDown, Plus, Trash2 } from "lucide-react";
 import "../App.css";
 
 /**
- * 스프린트 선택 드롭다운과 생성/삭제 관리를 담당하는 컴포넌트입니다.
+ * 스프린트 관리
  */
 const SprintManager = React.memo(
   ({
@@ -32,7 +32,6 @@ const SprintManager = React.memo(
 
     return (
       <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-        {/* 1. Sprint Selector (Dropdown) */}
         <div
           style={{ position: "relative" }}
           onMouseEnter={() => setIsDropdownOpen(true)}
@@ -114,7 +113,6 @@ const SprintManager = React.memo(
           )}
         </div>
 
-        {/* 2. Sprint Management (Add/Delete) */}
         <div style={{ position: "relative" }}>
           <button
             onClick={() => setIsFormOpen(!isFormOpen)}
@@ -170,7 +168,7 @@ const SprintManager = React.memo(
                   type="text"
                   value={newSprintName}
                   onChange={(e) => setNewSprintName(e.target.value)}
-                  placeholder="예: Q4 최종 점검"
+                  placeholder="스프린트의 이름을 입력하세요"
                   className="form-input"
                   style={{
                     flex: 1,
