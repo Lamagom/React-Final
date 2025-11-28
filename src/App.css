@@ -1,0 +1,446 @@
+/* ====================================================================
+   1. GLOBAL & RESET
+   ==================================================================== */
+:root {
+  --color-dark-bg: #141414; /* 넷플릭스 배경 */
+  --color-card-bg: #1f1f1f; /* 카드 기본 배경 */
+  --color-accent: #e50914; /* 넷플릭스 레드 (주요 액션) */
+  --color-accent-light: #ff3838;
+  --color-text-white: #ffffff;
+  --color-text-light: #e2e8f0; /* 밝은 텍스트 */
+  --color-text-muted: #94a3b8; /* 흐린 텍스트 */
+  --color-border: #333333; /* 경계선 */
+
+  --color-status-complete: #22c55e; /* Green */
+  --color-status-progress: #facc15; /* Yellow */
+  --color-status-pending: #a1a1aa; /* Gray */
+}
+
+body {
+  background-color: var(--color-dark-bg);
+  color: var(--color-text-light);
+  font-family: "Arial", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 5rem;
+}
+
+/* ====================================================================
+   2. NAVBAR & UTILS
+   ==================================================================== */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 50;
+  padding: 1rem 2.5rem;
+  /* 고급스러운 반투명 그라데이션 효과 */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
+  backdrop-filter: blur(5px);
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: 0.1rem;
+  color: var(--color-accent);
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.max-width-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2.5rem;
+}
+
+/* ====================================================================
+   3. HERO SECTION (DASHBOARD)
+   ==================================================================== */
+.hero-section {
+  padding-top: 6rem;
+  margin-bottom: 3rem;
+  height: 45vh;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--color-border);
+}
+
+.hero-background {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.3;
+  transform: scale(1.05);
+  transition: transform 1.5s ease-out;
+  z-index: 1;
+}
+
+.hero-section:hover .hero-background {
+  transform: scale(1);
+}
+
+.hero-gradient {
+  position: absolute;
+  inset: 0;
+  /* 좌측/하단에 어둠을 깔아 텍스트 가독성 확보 */
+  background: linear-gradient(
+    to right,
+    rgba(20, 20, 20, 0.9) 0%,
+    rgba(20, 20, 20, 0.5) 50%,
+    rgba(20, 20, 20, 0.1) 100%
+  );
+  z-index: 10;
+}
+
+.hero-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 3rem;
+  width: 66.6666%; /* 2/3 width */
+  z-index: 20;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  text-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+.hero-text {
+  color: var(--color-text-muted);
+  font-size: 1.125rem;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* ====================================================================
+   4. PROGRESS BAR
+   ==================================================================== */
+.progress-container {
+  width: 100%;
+  max-width: 400px;
+}
+
+.progress-bar-track {
+  width: 100%;
+  background-color: rgba(113, 113, 113, 0.5);
+  border-radius: 9999px;
+  height: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 9999px;
+  background-color: var(--color-accent);
+  transition: width 1s ease-out;
+  /* 고급스러운 글로우 효과 */
+  box-shadow: 0 0 15px rgba(229, 9, 20, 0.7);
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+/* ====================================================================
+   5. FORM STYLES
+   ==================================================================== */
+.goal-form-section {
+  padding: 1.5rem;
+  background-color: #1a1a1a;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.form-title-border {
+  border-left: 4px solid var(--color-accent);
+  padding-left: 1rem;
+}
+
+.form-group {
+  position: relative;
+  flex-grow: 1;
+}
+
+.form-input,
+.form-select {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: var(--color-text-light);
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.form-input:focus,
+.form-select:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 1px var(--color-accent);
+}
+
+.form-input-icon {
+  position: absolute;
+  top: 50%;
+  left: 0.75rem;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+}
+
+.form-submit-btn {
+  background-color: var(--color-accent);
+  color: var(--color-text-white);
+  font-weight: bold;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 10px rgba(229, 9, 20, 0.4);
+}
+
+.form-submit-btn:hover {
+  background-color: var(--color-accent-light);
+  box-shadow: 0 6px 15px rgba(229, 9, 20, 0.6);
+}
+
+/* ====================================================================
+   6. GOAL LIST & ITEM (CARD)
+   ==================================================================== */
+.goal-list-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 0;
+  color: var(--color-text-muted);
+  border: 2px dashed var(--color-border);
+  border-radius: 0.75rem;
+  background-color: rgba(31, 31, 31, 0.5);
+}
+
+/* Goal Item Card */
+.goal-item {
+  position: relative;
+  background-color: var(--color-card-bg);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  border: 1px solid var(--color-border);
+}
+
+.goal-item:hover {
+  transform: scale(1.03);
+  background-color: #282828;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+  border-color: #555555;
+}
+
+.goal-item-completed {
+  border-color: var(--color-status-complete);
+  opacity: 0.7;
+}
+
+.item-header {
+  height: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: linear-gradient(to bottom, #2d2d2d, var(--color-card-bg));
+}
+
+.item-header span {
+  font-size: 3rem;
+  opacity: 0.8;
+}
+
+.item-status {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.625rem;
+  font-weight: bold;
+  border-radius: 0.25rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 1px solid;
+}
+
+.status-pending {
+  border-color: var(--color-status-pending);
+  color: var(--color-status-pending);
+}
+.status-progress {
+  border-color: var(--color-status-progress);
+  color: var(--color-status-progress);
+}
+.status-complete {
+  border-color: var(--color-status-complete);
+  color: var(--color-status-complete);
+}
+
+.item-content {
+  padding: 1rem;
+}
+
+.item-title-completed {
+  text-decoration: line-through;
+  color: var(--color-text-muted);
+}
+
+/* Slider Custom Styling */
+.slider-container {
+  margin-top: 1rem;
+}
+
+.progress-slider-bar {
+  position: relative;
+  height: 8px;
+  width: 100%;
+  background-color: #525252;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progress-slider-bar input[type="range"] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.progress-slider-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.3s;
+}
+
+.completion-message {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: var(--color-status-complete);
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 0.5rem;
+  background-color: #333333;
+  border-radius: 0.25rem;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.delete-btn {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  padding: 0.375rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 9999px;
+  color: var(--color-text-muted);
+  opacity: 0;
+  transition: all 0.2s;
+}
+
+.goal-item:hover .delete-btn {
+  opacity: 1;
+}
+
+.delete-btn:hover {
+  color: var(--color-accent);
+  background-color: #000000;
+}
+
+/* ====================================================================
+   7. MODAL STYLES
+   ==================================================================== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal-content {
+  background-color: #1f1f1f;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  border: 1px solid var(--color-accent);
+  animation: zoomIn 0.3s ease-out;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.modal-confirm-btn {
+  background-color: var(--color-accent);
+  color: var(--color-text-white);
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.modal-confirm-btn:hover {
+  background-color: var(--color-accent-light);
+}
+
+.modal-cancel-btn {
+  color: var(--color-text-muted);
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s;
+}
+
+.modal-cancel-btn:hover {
+  background-color: #333333;
+}
