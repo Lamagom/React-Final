@@ -13,10 +13,17 @@ export const useLocalStorage = (key, initialValue) => {
       return initialValue;
     }
     try {
+<<<<<<< HEAD
       // Local Storage에서 해당 키의 값을 가져오게만듬.
       const item = window.localStorage.getItem(key);
 
       // 값이 있으면 JSON.parse를 통해 객체/배열 형태로 변환하여 반환
+=======
+      // 1. Local Storage에서 해당 키의 값을 가져오게만듬.
+      const item = window.localStorage.getItem(key);
+
+      // 2. 값이 있으면 JSON.parse를 통해 객체/배열 형태로 변환하여 반환
+>>>>>>> 881e8bfd9fb4eb791f71991e8b40e2a0ea3b1e1b
       return item ? JSON.parse(item) : initialValue;
     } catch (error) {
       // 에러 발생 시 (예: Local Storage 접근 불가), 초기 값을 사용

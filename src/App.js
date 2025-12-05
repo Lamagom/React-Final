@@ -126,7 +126,11 @@ function App() {
       ? "var(--color-status-complete)"
       : "var(--color-accent)";
 
+<<<<<<< HEAD
   // 상세 정보
+=======
+  // 개발 연혁 및 상세 정보 내용 (JSX)
+>>>>>>> 881e8bfd9fb4eb791f71991e8b40e2a0ea3b1e1b
   const devHistoryContent = (
     <div
       style={{
@@ -223,6 +227,10 @@ function App() {
 
       <div className="max-width-container">
         <div className="hero-section">
+<<<<<<< HEAD
+=======
+          {/* Background */}
+>>>>>>> 881e8bfd9fb4eb791f71991e8b40e2a0ea3b1e1b
           <div
             className="hero-background"
             style={{
@@ -375,6 +383,10 @@ function App() {
         </div>
       </div>
 
+<<<<<<< HEAD
+=======
+      {/* 5. Custom Confirmation Modal (스프린트 삭제) */}
+>>>>>>> 881e8bfd9fb4eb791f71991e8b40e2a0ea3b1e1b
       <ConfirmationModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
@@ -383,6 +395,10 @@ function App() {
         message="선택한 스프린트와 이 스프린트에 포함된 모든 목표가 영구적으로 삭제됩니다. 이 작업은 되돌릴 수 없습니다. 계속하시겠습니까?"
       />
 
+<<<<<<< HEAD
+=======
+      {/* 6. 상세 정보 모달  */}
+>>>>>>> 881e8bfd9fb4eb791f71991e8b40e2a0ea3b1e1b
       <ConfirmationModal
         isOpen={isInfoModalOpen}
         onClose={() => setIsInfoModalOpen(false)}

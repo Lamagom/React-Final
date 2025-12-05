@@ -3,7 +3,11 @@ import { ChevronDown, Plus, Trash2 } from "lucide-react";
 import "../App.css";
 
 /**
+<<<<<<< HEAD
  * 스프린트 관리
+=======
+ * 스프린트 관리 컴포넌트
+>>>>>>> 881e8bfd9fb4eb791f71991e8b40e2a0ea3b1e1b
  */
 const SprintManager = React.memo(
   ({

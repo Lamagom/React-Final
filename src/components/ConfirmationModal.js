@@ -21,12 +21,17 @@ const ConfirmationModal = ({
   message,
   confirmText = "확인",
   hideCancel = false,
+<<<<<<< HEAD
   confirmButtonVariant,
+=======
+  confirmButtonVariant, // 새 prop
+>>>>>>> 881e8bfd9fb4eb791f71991e8b40e2a0ea3b1e1b
   children,
   modalClassName,
 }) => {
   if (!isOpen) return null;
 
+<<<<<<< HEAD
   const buttonVariant =
     confirmButtonVariant || (hideCancel ? "text" : "primary");
 
@@ -40,6 +45,25 @@ const ConfirmationModal = ({
       <div className={`modal-content ${modalClassName || ""}`}>
         <h3 className="modal-title">{title}</h3>
 
+=======
+  // 1. 버튼 스타일 타입 결정
+  // hideCancel이 true이고 Variant가 지정되지 않았다면 'text'를 기본값으로 사용
+  const buttonVariant =
+    confirmButtonVariant || (hideCancel ? "text" : "primary");
+
+  // 2. 버튼 클래스 이름 동적 생성
+  const confirmButtonClass = `modal-button modal-confirm-btn modal-button-${buttonVariant}`;
+  const cancelButtonClass =
+    "modal-button modal-cancel-btn modal-button-secondary"; // 취소 버튼도 명확히 정의
+
+  return (
+    <div className="modal-overlay">
+      {/* modalClassName Prop을 modal-content 클래스에 적용 */}
+      <div className={`modal-content ${modalClassName || ""}`}>
+        <h3 className="modal-title">{title}</h3>
+
+        {/* message 또는 children 중 하나를 표시 */}
+>>>>>>> 881e8bfd9fb4eb791f71991e8b40e2a0ea3b1e1b
         {children ? (
           <div className="modal-message-content">{children}</div>
         ) : (
@@ -49,6 +73,10 @@ const ConfirmationModal = ({
         )}
 
         <div className="modal-actions">
+<<<<<<< HEAD
+=======
+          {/* hideCancel이 true가 아닐 때만 취소 버튼 표시 */}
+>>>>>>> 881e8bfd9fb4eb791f71991e8b40e2a0ea3b1e1b
           {!hideCancel && (
             <button
               onClick={onClose}
@@ -58,8 +86,16 @@ const ConfirmationModal = ({
             </button>
           )}
 
+<<<<<<< HEAD
           <button onClick={onConfirm} className={confirmButtonClass}>
             {confirmText}
+=======
+          <button
+            onClick={onConfirm}
+            className={confirmButtonClass} // 동적 클래스 적용
+          >
+            {confirmText} {/* confirmText Prop 사용 */}
+>>>>>>> 881e8bfd9fb4eb791f71991e8b40e2a0ea3b1e1b
           </button>
         </div>
       </div>
