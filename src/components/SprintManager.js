@@ -3,11 +3,7 @@ import { ChevronDown, Plus, Trash2 } from "lucide-react";
 import "../App.css";
 
 /**
-<<<<<<< HEAD
- * 스프린트 관리
-=======
  * 스프린트 관리 컴포넌트
->>>>>>> 881e8bfd9fb4eb791f71991e8b40e2a0ea3b1e1b
  */
 const SprintManager = React.memo(
   ({
@@ -36,6 +32,7 @@ const SprintManager = React.memo(
 
     return (
       <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+        {/* 드롭다운 */}
         <div
           style={{ position: "relative" }}
           onMouseEnter={() => setIsDropdownOpen(true)}
@@ -117,6 +114,7 @@ const SprintManager = React.memo(
           )}
         </div>
 
+        {/* 스프린트 관리 사이드 메뉴 */}
         <div style={{ position: "relative" }}>
           <button
             onClick={() => setIsFormOpen(!isFormOpen)}
@@ -207,6 +205,7 @@ const SprintManager = React.memo(
               >
                 현재 스프린트 ({sprints.length})
               </h4>
+
               <div
                 style={{
                   maxHeight: "128px",
@@ -241,6 +240,7 @@ const SprintManager = React.memo(
                     >
                       {sprint.name}
                     </span>
+
                     {sprint.id !== "sprint-1" && (
                       <button
                         onClick={() => onDeleteSprint(sprint.id)}
