@@ -1,109 +1,48 @@
-import React, { useCallback, useMemo } from "react";
-import { Trash2, Trophy } from "lucide-react";
-import { getGoalStatus } from "../utils/helpers";
-import "../App.css";
+import React, { useMemo } from "react";
+import { BookOpen, Dumbbell, Home, Coffee, Trash2 } from "lucide-react";
+
+const categoryIcons = {
+  공부: <BookOpen size={16} />,
+  운동: <Dumbbell size={16} />,
+  생활: <Home size={16} />,
+  기타: <Coffee size={16} />,
+};
 
 const GoalItem = React.memo(({ goal, onUpdateProgress, onDelete }) => {
-  const { status, color, borderColor, icon } = getGoalStatus(goal.progress);
-  const isCompleted = goal.progress === 100;
+  const today = useMemo(() => new Date(), []);
+  const due = useMemo(() => new Date(goal.dueDate), [goal.dueDate]);
+  const daysLeft = Math.ceil((due - today) / (1000 * 60 * 60 * 24));
 
-  const handleSliderChange = useCallback(
-    (e) => {
-      onUpdateProgress(goal.id, Number(e.target.value));
-    },
-    [goal.id, onUpdateProgress]
-  );
-
-  // 진행률에 따른 동적 그라데이션 계산 (JS에서 Inline Style로 적용)
-  const getProgressGradient = useMemo(() => {
-    const progress = goal.progress;
-    const colorRed = "#ef4444";
-    const colorYellow = "#facc15";
-    const colorGreen = "#22c55e";
-    const colorTrack = "#525252";
-
-    if (progress === 0) return colorTrack;
-
-    let colorStart = colorRed;
-    let colorEnd = colorYellow;
-
-    if (progress > 50) {
-      colorStart = colorYellow;
-      colorEnd = colorGreen;
-    }
-
-    return `linear-gradient(90deg, ${colorStart} 0%, ${colorEnd} ${progress}%, ${colorTrack} ${progress}%)`;
+  const status = useMemo(() => {
+    if (goal.progress >= 100) return { text: "완료", color: "#22c55e" };
+    if (goal.progress > 0) return { text: "진행중", color: "#facc15" };
+    return { text: "보류", color: "#a1a1aa" };
   }, [goal.progress]);
 
-  const statusClassName =
-    status === "완료"
-      ? "status-complete"
-      : status === "진행중"
-      ? "status-progress"
-      : "status-pending";
-
   return (
-    <div className={`goal-item ${isCompleted ? "goal-item-completed" : ""}`}>
-      <div className="item-header">
-        <span>{icon}</span>
-        <div className={`item-status ${statusClassName}`}>{status}</div>
+    <div className="goal-item" style={{ borderRadius: "1rem", backgroundColor: "#1f1f1f", border: "1px solid #333", padding: "1rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <span style={{ fontWeight: "bold", fontSize: "1rem" }}>{goal.title}</span>
+        <button onClick={() => onDelete(goal.id)} style={{ backgroundColor: "rgba(31,31,31,0.7)", borderRadius: "0.5rem", padding: "0.25rem", border: "none", cursor: "pointer" }}>
+          <Trash2 size={16} color="#e50914" />
+        </button>
       </div>
-
-      <div className="item-content">
-        <span
-          style={{ fontSize: "10px", fontWeight: "bold", color: "#ef4444" }}
-          className="mb-1 block uppercase"
-        >
-          {goal.category}
-        </span>
-        <h3
-          className={`text-base font-bold leading-tight mb-4 ${
-            isCompleted ? "item-title-completed" : ""
-          }`}
-          style={{ color: isCompleted ? "#999" : "var(--color-text-light)" }}
-        >
-          {goal.title}
-        </h3>
-
-        <div className="slider-container">
-          <div className="progress-label" style={{ fontSize: "12px" }}>
-            <span>Progress</span>
-            <span style={{ fontWeight: "bold" }}>{goal.progress}%</span>
-          </div>
-
-          <div className="progress-slider-bar">
-            <div
-              className="progress-slider-fill"
-              style={{
-                background: getProgressGradient,
-                width: `${goal.progress}%`,
-              }}
-            />
-            <input
-              type="range"
-              min="0"
-              max="100"
-              value={goal.progress}
-              onChange={handleSliderChange}
-            />
-          </div>
-        </div>
-
-        {isCompleted && (
-          <div className="completion-message">
-            <Trophy size={16} />
-            <span>목표도달 완료! 축하합니다!</span>
-          </div>
-        )}
+      <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
+        {categoryIcons[goal.category]}
+        <span style={{ fontSize: "0.875rem", color: "#ccc" }}>{goal.category}</span>
       </div>
-
-      <button
-        onClick={() => onDelete(goal.id)}
-        className="delete-btn"
-        title="목표 삭제"
-      >
-        <Trash2 size={14} />
-      </button>
+      <div style={{ fontSize: "0.75rem", color: daysLeft <= 2 ? "#e50914" : "#aaa" }}>
+        D-{daysLeft >= 0 ? daysLeft : "마감"} ({goal.dueDate})
+      </div>
+      <input
+        type="range"
+        min={0}
+        max={100}
+        value={goal.progress}
+        onChange={(e) => onUpdateProgress(goal.id, Number(e.target.value))}
+        style={{ width: "100%", accentColor: status.color }}
+      />
+      <div style={{ fontSize: "0.75rem", fontWeight: "bold", color: status.color }}>{status.text}</div>
     </div>
   );
 });

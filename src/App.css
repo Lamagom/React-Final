@@ -1,39 +1,36 @@
-/* ====================================================================
-    1. GLOBAL & RESET
-    ==================================================================== */
+/* 둥근 폰트 적용 */
+@import url('https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css');
+
 :root {
-  --color-dark-bg: #141414; /* 넷플릭스 배경 */
-  --color-card-bg: #1f1f1f; /* 카드 기본 배경 */
-  --color-accent: #e50914; /* 넷플릭스 레드 (주요 액션) */
+  --color-dark-bg: #141414;
+  --color-card-bg: #1f1f1f;
+  --color-accent: #e50914;
   --color-accent-light: #ff3838;
   --color-text-white: #ffffff;
-  --color-text-light: #e2e8f0; /* 밝은 텍스트 */
-  --color-text-muted: #94a3b8; /* 흐린 텍스트 */
-  --color-border: #333333; /* 경계선 */
+  --color-text-light: #e2e8f0;
+  --color-text-muted: #94a3b8;
+  --color-border: #333333;
 
-  --color-status-complete: #22c55e; /* Green */
-  --color-status-progress: #facc15; /* Yellow */
-  --color-status-pending: #a1a1aa; /* Gray */
+  --color-status-complete: #22c55e;
+  --color-status-progress: #facc15;
+  --color-status-pending: #a1a1aa;
 }
 
 body {
   background-color: var(--color-dark-bg);
   color: var(--color-text-light);
-  font-family: "Arial", sans-serif;
+  font-family: 'NanumSquareRound', 'NanumSquare', sans-serif; /* 둥근 글씨체 */
   -webkit-font-smoothing: antialiased;
   padding-bottom: 5rem;
 }
 
-/* ====================================================================
-    2. NAVBAR & UTILS
-    ==================================================================== */
+/* NAVBAR & UTILS */
 .navbar {
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 50;
   padding: 1rem 2.5rem;
-  /* 고급스러운 반투명 그라데이션 효과 */
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
   backdrop-filter: blur(5px);
 }
@@ -53,9 +50,7 @@ body {
   padding: 0 2.5rem;
 }
 
-/* ====================================================================
-    3. HERO SECTION (DASHBOARD)
-    ==================================================================== */
+/* HERO SECTION */
 .hero-section {
   padding-top: 6rem;
   margin-bottom: 3rem;
@@ -85,13 +80,7 @@ body {
 .hero-gradient {
   position: absolute;
   inset: 0;
-  /* 좌측/하단에 어둠을 깔아 텍스트 가독성 확보 */
-  background: linear-gradient(
-    to right,
-    rgba(20, 20, 20, 0.9) 0%,
-    rgba(20, 20, 20, 0.5) 50%,
-    rgba(20, 20, 20, 0.1) 100%
-  );
+  background: linear-gradient(to right, rgba(20, 20, 20, 0.9) 0%, rgba(20, 20, 20, 0.5) 50%, rgba(20, 20, 20, 0.1) 100%);
   z-index: 10;
 }
 
@@ -100,7 +89,7 @@ body {
   bottom: 0;
   left: 0;
   padding: 3rem;
-  width: 66.6666%; /* 2/3 width */
+  width: 66.6666%;
   z-index: 20;
 }
 
@@ -119,9 +108,7 @@ body {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* ====================================================================
-    4. PROGRESS BAR
-    ==================================================================== */
+/* PROGRESS BAR */
 .progress-container {
   width: 100%;
   max-width: 400px;
@@ -140,7 +127,6 @@ body {
   border-radius: 9999px;
   background-color: var(--color-accent);
   transition: width 1s ease-out;
-  /* 고급스러운 글로우 효과 */
   box-shadow: 0 0 15px rgba(229, 9, 20, 0.7);
 }
 
@@ -151,9 +137,7 @@ body {
   margin-bottom: 0.5rem;
 }
 
-/* ====================================================================
-    5. FORM STYLES
-    ==================================================================== */
+/* FORM STYLES */
 .goal-form-section {
   padding: 1.5rem;
   background-color: #1a1a1a;
@@ -172,8 +156,7 @@ body {
   flex-grow: 1;
 }
 
-.form-input,
-.form-select {
+.form-input, .form-select {
   width: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   color: var(--color-text-light);
@@ -183,12 +166,7 @@ body {
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.form-input::placeholder {
-  color: var(--color-text-muted);
-}
-
-.form-input:focus,
-.form-select:focus {
+.form-input:focus, .form-select:focus {
   outline: none;
   border-color: var(--color-accent);
   box-shadow: 0 0 0 1px var(--color-accent);
@@ -217,9 +195,50 @@ body {
   box-shadow: 0 6px 15px rgba(229, 9, 20, 0.6);
 }
 
-/* ====================================================================
-    6. GOAL LIST & ITEM (CARD)
-    ==================================================================== */
+/* 날짜 입력 필드 아이콘 반전 */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+}
+
+/* 카테고리 추가 버튼 */
+.add-category-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    background-color: #333;
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    color: var(--color-text-light);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.add-category-btn:hover {
+    background-color: #444;
+    color: var(--color-accent);
+}
+
+/* D-Day 배지 스타일 */
+.d-day-badge {
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 0.2rem 0.5rem;
+    border-radius: 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+    display: inline-flex;
+    align-items: center;
+    margin-left: 0.5rem;
+}
+.d-day-badge.urgent {
+    background-color: var(--color-accent);
+    color: white;
+    animation: pulse 2s infinite;
+}
+
+/* GOAL LIST & ITEM */
 .goal-list-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -238,7 +257,6 @@ body {
   background-color: rgba(31, 31, 31, 0.5);
 }
 
-/* Goal Item Card */
 .goal-item {
   position: relative;
   background-color: var(--color-card-bg);
@@ -286,33 +304,14 @@ body {
   border: 1px solid;
 }
 
-.status-pending {
-  border-color: var(--color-status-pending);
-  color: var(--color-status-pending);
-}
-.status-progress {
-  border-color: var(--color-status-progress);
-  color: var(--color-status-progress);
-}
-.status-complete {
-  border-color: var(--color-status-complete);
-  color: var(--color-status-complete);
-}
+.status-pending { border-color: var(--color-status-pending); color: var(--color-status-pending); }
+.status-progress { border-color: var(--color-status-progress); color: var(--color-status-progress); }
+.status-complete { border-color: var(--color-status-complete); color: var(--color-status-complete); }
 
-.item-content {
-  padding: 1rem;
-}
+.item-content { padding: 1rem; }
+.item-title-completed { text-decoration: line-through; color: var(--color-text-muted); }
 
-.item-title-completed {
-  text-decoration: line-through;
-  color: var(--color-text-muted);
-}
-
-/* Slider Custom Styling */
-.slider-container {
-  margin-top: 1rem;
-}
-
+.slider-container { margin-top: 1rem; }
 .progress-slider-bar {
   position: relative;
   height: 8px;
@@ -321,7 +320,6 @@ body {
   border-radius: 9999px;
   overflow: hidden;
 }
-
 .progress-slider-bar input[type="range"] {
   position: absolute;
   width: 100%;
@@ -330,7 +328,6 @@ body {
   cursor: pointer;
   z-index: 10;
 }
-
 .progress-slider-fill {
   position: absolute;
   top: 0;
@@ -356,13 +353,8 @@ body {
 }
 
 @keyframes pulse {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-  }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
 }
 
 .delete-btn {
@@ -376,21 +368,11 @@ body {
   opacity: 0;
   transition: all 0.2s;
 }
+.goal-item:hover .delete-btn { opacity: 1; }
+.delete-btn:hover { color: var(--color-accent); background-color: #000000; }
 
-.goal-item:hover .delete-btn {
-  opacity: 1;
-}
-
-.delete-btn:hover {
-  color: var(--color-accent);
-  background-color: #000000;
-}
-
-/* ====================================================================
-    7. MODAL STYLES
-    ==================================================================== */
+/* MODAL STYLES */
 .modal-overlay {
-  /* Backdrop 클래스 이름 변경 */
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.7);
@@ -412,17 +394,10 @@ body {
 }
 
 @keyframes zoomIn {
-  from {
-    transform: scale(0.9);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
-/* modal-button 공통 스타일 추가 */
 .modal-button {
   border: none;
   cursor: pointer;
@@ -433,77 +408,22 @@ body {
   transition: background-color 0.2s, color 0.2s;
 }
 
-/* Primary/Confirm Button (기존 modal-confirm-btn) */
-.modal-confirm-btn {
-  background-color: var(--color-accent);
-  color: var(--color-text-white);
-  box-shadow: 0 4px 10px rgba(229, 9, 20, 0.4);
-}
+.modal-confirm-btn { background-color: var(--color-accent); color: var(--color-text-white); box-shadow: 0 4px 10px rgba(229, 9, 20, 0.4); }
+.modal-confirm-btn:hover { background-color: var(--color-accent-light); }
+.modal-cancel-btn { background-color: transparent; color: var(--color-text-muted); }
+.modal-cancel-btn:hover { background-color: #333333; color: var(--color-text-light); }
+.modal-button-text { background-color: transparent !important; border: none !important; color: var(--color-text-muted) !important; box-shadow: none !important; padding: 0.5rem 0.5rem; }
+.modal-button-text:hover { background-color: rgba(255, 255, 255, 0.08) !important; color: var(--color-text-light) !important; }
 
-.modal-confirm-btn:hover {
-  background-color: var(--color-accent-light);
-}
-
-/* Secondary/Cancel Button (기존 modal-cancel-btn) */
-.modal-cancel-btn {
-  background-color: transparent;
-  color: var(--color-text-muted);
-}
-
-.modal-cancel-btn:hover {
-  background-color: #333333;
-  color: var(--color-text-light);
-}
-
-/* ⭐️ 텍스트 버튼 스타일 (흰 바탕 없이 글자만 어둡게) */
-.modal-button-text {
-  /* 배경과 테두리를 투명하게 */
-  background-color: transparent !important;
-  border: none !important;
-
-  /* 글자색을 어둡게 (다크 모드 기준으로는 흐린 텍스트 색상) */
-  color: var(--color-text-muted) !important;
-
-  /* 기본 버튼에 설정된 box-shadow 제거 */
-  box-shadow: none !important;
-  padding: 0.5rem 0.5rem; /* 텍스트 버튼은 패딩을 약간 줄임 */
-}
-
-.modal-button-text:hover {
-  /* 호버 시 옅은 배경색을 추가하여 버튼임을 표시 */
-  background-color: rgba(255, 255, 255, 0.08) !important;
-  color: var(--color-text-light) !important; /* 글자를 더 밝게 */
-}
-
-/* ---------------------------------------------------- */
-/* 3. 모달 오버라이드 (우측 상단 배치) */
-/* ---------------------------------------------------- */
-
-/* 모달 컨텐츠 자체의 스타일 오버라이드 */
 .modal-content.top-right-modal {
-  position: fixed; /* 뷰포트에 고정 */
-  top: 5rem; /* 상단에서 띄우기 (네비게이션바 아래) */
-  right: 2rem; /* 오른쪽에서 띄우기 */
-  transform: none; /* 중앙 정렬 (translate) 해제 */
-  max-width: 400px; /* 폭 제한 */
+  position: fixed;
+  top: 5rem;
+  right: 2rem;
+  transform: none;
+  max-width: 400px;
   width: 90%;
 }
 
-/* 닫기 버튼 위/아래 여백 조정 */
-.modal-content.top-right-modal .modal-actions {
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--color-border); /* 변수 변경 */
-}
-
-/* 제목 아래 여백 조정 */
-.modal-content.top-right-modal .modal-title {
-  margin-bottom: 0.5rem;
-}
-
-/* 상세 내용 컨테이너 (스크롤 가능하게 설정) */
-.modal-content.top-right-modal .modal-message-content {
-  max-height: 70vh; /* 최대 높이 설정 */
-  overflow-y: auto;
-  padding-right: 15px; /* 스크롤바 공간 확보 */
-}
+.modal-content.top-right-modal .modal-actions { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--color-border); }
+.modal-content.top-right-modal .modal-title { margin-bottom: 0.5rem; }
+.modal-content.top-right-modal .modal-message-content { max-height: 70vh; overflow-y: auto; padding-right: 15px; }
